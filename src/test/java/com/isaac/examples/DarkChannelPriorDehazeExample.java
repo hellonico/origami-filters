@@ -5,11 +5,12 @@ import com.isaac.utils.ImShow;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
+import origami.Origami;
 
 public class DarkChannelPriorDehazeExample {
 
     static {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        Origami.init();
     }
     // Paper url: https://www.robots.ox.ac.uk/~vgg/rg/papers/hazeremoval.pdf
     private static final double krnlRatio = 0.01; // set kernel ratio
@@ -19,7 +20,7 @@ public class DarkChannelPriorDehazeExample {
 
     public static void main (String[] args) {
         String imgPath = "src/main/resources/haze_images/train.bmp";
-        Mat image = Imgcodecs.imread(imgPath, Imgcodecs.CV_LOAD_IMAGE_COLOR);
+        Mat image = Imgcodecs.imread(imgPath, Imgcodecs.IMREAD_COLOR);
         new ImShow("Original").showImage(image);
         Mat result = DarkChannelPriorDehaze.enhance(image, krnlRatio, minAtmosLight, eps);
         new ImShow("Dehazing").showImage(result);

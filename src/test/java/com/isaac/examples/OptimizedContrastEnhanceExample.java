@@ -6,11 +6,12 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
+import origami.Origami;
 
 public class OptimizedContrastEnhanceExample {
 
     static {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        Origami.init();
     }
 
     private static final int blkSize = 100; // block size
@@ -21,7 +22,7 @@ public class OptimizedContrastEnhanceExample {
 
     public static void main (String[] args) {
         String imgPath = "src/main/resources/haze_images/canon_2.jpg";
-        Mat image = Imgcodecs.imread(imgPath, Imgcodecs.CV_LOAD_IMAGE_COLOR);
+        Mat image = Imgcodecs.imread(imgPath, Imgcodecs.IMREAD_COLOR);
         new ImShow("org-image").showImage(image);
         Mat result = OptimizedContrastEnhance.enhance(image, blkSize, patchSize, lambda, eps, krnlSize);
         result.convertTo(result, CvType.CV_8UC1);

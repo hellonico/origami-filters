@@ -8,19 +8,20 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
+import origami.Origami;
 
 import com.isaac.utils.Filters;
 import com.isaac.utils.ImShow;
 
 public class GuidedFilterEnhanceExample {
 	
-	static {
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-	}
+    static {
+        Origami.init();
+    }
 
 	public static void main(String[] args) {
 		String imgPath = "src/main/resources/dcp_images/enhancement/tulips.bmp";
-		Mat image = Imgcodecs.imread(imgPath, Imgcodecs.CV_LOAD_IMAGE_COLOR);
+		Mat image = Imgcodecs.imread(imgPath, Imgcodecs.IMREAD_COLOR);
 		new ImShow("image").showImage(image);
 		image.convertTo(image, CvType.CV_32F);
 		List<Mat> img = new ArrayList<>();

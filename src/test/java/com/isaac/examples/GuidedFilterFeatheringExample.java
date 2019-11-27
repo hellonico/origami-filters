@@ -7,20 +7,21 @@ import org.opencv.imgcodecs.Imgcodecs;
 
 import com.isaac.utils.Filters;
 import com.isaac.utils.ImShow;
+import origami.Origami;
 
 public class GuidedFilterFeatheringExample {
 	
-	static {
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-	}
+    static {
+        Origami.init();
+    }
 
 	public static void main(String[] args) {
 		String imgPath = "src/main/resources/dcp_images/feathering/toy.bmp";
 		String guidedImgPath = "src/main/resources/dcp_images/feathering/toy-mask.bmp";
-		Mat image = Imgcodecs.imread(imgPath, Imgcodecs.CV_LOAD_IMAGE_COLOR); // load image
+		Mat image = Imgcodecs.imread(imgPath, Imgcodecs.IMREAD_COLOR); // load image
 		new ImShow("image").showImage(image);
 		image.convertTo(image, CvType.CV_32F);
-		Mat guide = Imgcodecs.imread(guidedImgPath, Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
+		Mat guide = Imgcodecs.imread(guidedImgPath, Imgcodecs.IMREAD_GRAYSCALE);
 		guide.convertTo(guide, CvType.CV_32F);
 		int r = 60;
 		double eps = 0.000001;

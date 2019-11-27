@@ -5,11 +5,12 @@ import com.isaac.utils.ImShow;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
+import origami.Origami;
 
 public class ALTMRetinexExample {
 
     static {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        Origami.init();
     }
 
     // Local Adaptation Parameters
@@ -21,7 +22,7 @@ public class ALTMRetinexExample {
 
     public static void main (String[] args) {
         String imgPath = "src/main/resources/dark_images/liahthouse.png";
-        Mat image = Imgcodecs.imread(imgPath, Imgcodecs.CV_LOAD_IMAGE_COLOR);
+        Mat image = Imgcodecs.imread(imgPath, Imgcodecs.IMREAD_COLOR);
         new ImShow("Original").showImage(image);
         Mat result = ALTMRetinex.enhance(image, r, eps, eta, lambda, krnlRatio);
         new ImShow("result").showImage(result);

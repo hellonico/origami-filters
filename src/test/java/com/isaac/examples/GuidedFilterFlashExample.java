@@ -8,23 +8,24 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
+import origami.Origami;
 
 import com.isaac.utils.Filters;
 import com.isaac.utils.ImShow;
 
 public class GuidedFilterFlashExample {
 	
-	static {
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-	}
+    static {
+        Origami.init();
+    }
 
 	public static void main(String[] args) {
 		String imgPath = "src/main/resources/dcp_images/flash/cave-flash.bmp";
 		String guidedImgPath = "src/main/resources/dcp_images/flash/cave-noflash.bmp";
-		Mat image = Imgcodecs.imread(imgPath, Imgcodecs.CV_LOAD_IMAGE_COLOR);
+		Mat image = Imgcodecs.imread(imgPath, Imgcodecs.IMREAD_COLOR);
 		new ImShow("image").showImage(image);
 		image.convertTo(image, CvType.CV_32F);
-		Mat guide = Imgcodecs.imread(guidedImgPath, Imgcodecs.CV_LOAD_IMAGE_COLOR);
+		Mat guide = Imgcodecs.imread(guidedImgPath, Imgcodecs.IMREAD_COLOR);
 		guide.convertTo(guide, CvType.CV_32F);
 		List<Mat> img = new ArrayList<>();
 		List<Mat> gid = new ArrayList<>();
