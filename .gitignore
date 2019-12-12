@@ -2,3 +2,8 @@ target
 .idea
 .settings
 .idea
+.gradle/
+build.gradle
+build/
+gradle.properties
+gradlew.bat
