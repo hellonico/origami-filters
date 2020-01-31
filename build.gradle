@@ -1,0 +1,53 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: "maven-publish"
+
+group = 'origami'
+version = '1.4'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+	maven { url "https://repo1.maven.org/maven2/" }
+	maven { url "https://repo.clojars.org/" }
+	maven { url "https://repository.hellonico.info/repository/hellonico/" }
+}
+dependencies {
+	compile group: 'origami', name: 'origami', version:'4.2.0-0'
+}
+
+sourceSets {
+    main {
+        resources {
+            exclude '**'
+        }
+    }
+}
+
+publishing {
+	publications {
+
+		maven(MavenPublication) {
+            groupId "origami"
+            artifactId "filters"
+            version project.version
+            from components.java
+        }	
+	}
+
+	repositories {
+
+		maven {
+			name "nexus"
+			url "https://repository.hellonico.info/repository/hellonico/"
+			credentials {
+				username mavenUser
+				password mavenPassword
+			}
+		}
+	}
+}
