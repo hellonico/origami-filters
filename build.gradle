@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: "maven-publish"
 
 group = 'origami'
-version = '1.4'
+version = '1.5'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -17,7 +17,7 @@ repositories {
 	maven { url "https://repository.hellonico.info/repository/hellonico/" }
 }
 dependencies {
-	compile group: 'origami', name: 'origami', version:'4.2.0-0'
+	compile group: 'origami', name: 'origami', version:'4.2.0-1'
 }
 
 sourceSets {
