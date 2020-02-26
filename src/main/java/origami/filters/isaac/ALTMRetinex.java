@@ -1,4 +1,4 @@
-package origami.filters;
+package origami.filters.isaac;
 
 import org.opencv.core.Mat;
 import origami.Filter;

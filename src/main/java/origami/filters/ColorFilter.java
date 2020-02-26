@@ -10,7 +10,24 @@ import org.opencv.core.Scalar;
 
 import origami.Filter;
 
+import java.awt.*;
+
 public class ColorFilter implements Filter {
+    static public class Red extends ColorFilter {
+        public Red() {
+            super(COLOR.RED);
+        }
+    }
+    static public class Blue extends ColorFilter {
+        public Blue() {
+            super(COLOR.BLUE);
+        }
+    }
+    static public class Pink extends ColorFilter {
+        public Pink() {
+            super(COLOR.PINK);
+        }
+    }
 
     enum COLOR {
         RED, BLUE, PINK
@@ -23,6 +40,10 @@ public class ColorFilter implements Filter {
      * https://i.stack.imgur.com/SobpV.jpg divided by 2
      * https://stackoverflow.com/questions/17878254/opencv-python-cant-detect-blue-objects
      */
+    public ColorFilter(int low, int high) {
+        this.low = low;
+        this.high = high;
+    }
 
     public ColorFilter(COLOR c) {
         switch (c) {
