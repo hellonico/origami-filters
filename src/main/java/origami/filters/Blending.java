@@ -1,4 +1,4 @@
-package me.filters.android;
+package origami.filters;
 
 import origami.Filter;
 import org.opencv.core.Mat;
