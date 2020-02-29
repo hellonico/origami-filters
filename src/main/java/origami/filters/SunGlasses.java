@@ -1,5 +1,6 @@
-package origami;
+package origami.filters;
 
+import origami.Filter;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 

@@ -1,5 +1,6 @@
-package origami;
+package origami.filters;
 
+import origami.Filter;
 import origami.filters.detect.Yolo;
 
 public class MyYolo  {
