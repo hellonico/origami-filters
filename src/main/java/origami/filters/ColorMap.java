@@ -5,7 +5,19 @@ import org.opencv.imgproc.Imgproc;
 import origami.Filter;
 
 public class ColorMap implements Filter {
-    int color = -1;
+    int color = 0;
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    public ColorMap() {
+
+    }
 
     public static class Autumn extends ColorMap {
         public Autumn() {

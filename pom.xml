@@ -6,39 +6,39 @@
 
     <groupId>origami</groupId>
     <artifactId>filters</artifactId>
-    <version>1.8</version>
+    <version>1.9-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <build>
-<plugins>
-	  <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>compile</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>testCompile</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>testCompile</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-              <source>8</source>
-              <target>8</target>
-          </configuration>
-      </plugin>
-</plugins>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>testCompile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <repositories>
@@ -75,7 +75,12 @@
         <dependency>
             <groupId>origami</groupId>
             <artifactId>origami</artifactId>
-            <version>4.2.0-1</version>
+            <version>4.2.0-5-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.clojure</groupId>
+            <artifactId>clojure</artifactId>
+            <version>1.10.1</version>
         </dependency>
     </dependencies>
 

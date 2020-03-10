@@ -61,6 +61,37 @@ public class SunGlasses implements Filter {
     double gamma = 0;
     Scalar color = new Scalar(0, 0, 255);
 
+    public double getAlpha() {
+        return alpha;
+    }
+
+    public void setAlpha(double alpha) {
+        this.alpha = alpha;
+    }
+
+    public double getBeta() {
+        return beta;
+    }
+
+    public void setBeta(double beta) {
+        this.beta = beta;
+    }
+
+    public double getGamma() {
+        return gamma;
+    }
+
+    public void setGamma(double gamma) {
+        this.gamma = gamma;
+    }
+
+    public String getColor() {
+        return Utils.Scalar_String(color);
+    }
+
+    public void setColor(String color) {
+        this.color = Utils.String_Scalar(color);
+    }
 
     public Mat apply(Mat mat) {
         Mat result = new Mat();

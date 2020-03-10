@@ -1,18 +1,58 @@
 package origami.filters;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
+import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import origami.Filter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Contours implements Filter {
     private int threshold = 100;
+    Scalar color = new Scalar(256, 150, 0);
+    int thickness = 2;
+    int linetype = 8;
+    private Point offset = new Point();
+
+    public String getOffset() {
+        return Utils.Point_String(offset);
+    }
+
+    public void setOffset(String offset) {
+        this.offset = Utils.String_Point(offset);
+    }
+
+    public int getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(int threshold) {
+        this.threshold = threshold;
+    }
+
+    public String getColor() {
+        return Utils.Scalar_String(color);
+    }
+
+    public void setColor(String color) {
+        this.color = Utils.String_Scalar(color);
+    }
+
+    public int getThickness() {
+        return thickness;
+    }
+
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
+    }
+
+    public int getLinetype() {
+        return linetype;
+    }
+
+    public void setLinetype(int linetype) {
+        this.linetype = linetype;
+    }
 
     public Mat apply(Mat srcImage) {
         Mat cannyOutput = new Mat();
@@ -24,8 +64,7 @@ public class Contours implements Filter {
         Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
         Mat drawing = Mat.zeros(cannyOutput.size(), CvType.CV_8UC3);
         for (int i = 0; i < contours.size(); i++) {
-            Scalar color = new Scalar(256, 150, 0);
-            Imgproc.drawContours(drawing, contours, i, color, 2, 8, hierarchy, 0, new Point());
+            Imgproc.drawContours(drawing, contours, i, color, thickness, linetype, hierarchy, 0, offset);
         }
         return drawing;
     }

@@ -40,8 +40,24 @@ public class ColorFilter implements Filter {
      * https://i.stack.imgur.com/SobpV.jpg divided by 2
      * https://stackoverflow.com/questions/17878254/opencv-python-cant-detect-blue-objects
      */
-    public ColorFilter(int low, int high) {
+    public ColorFilter() {
+//        this.low = low;
+//        this.high = high;
+    }
+
+    public int getLow() {
+        return low;
+    }
+
+    public void setLow(int low) {
         this.low = low;
+    }
+
+    public int getHigh() {
+        return high;
+    }
+
+    public void setHigh(int high) {
         this.high = high;
     }
 

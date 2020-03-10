@@ -16,6 +16,30 @@ public class Fisheye implements Filter {
     float cX = 300;
     float cY = 540;
 
+    public float getFishVal() {
+        return fishVal;
+    }
+
+    public void setFishVal(float fishVal) {
+        this.fishVal = fishVal;
+    }
+
+    public float getcX() {
+        return cX;
+    }
+
+    public void setcX(float cX) {
+        this.cX = cX;
+    }
+
+    public float getcY() {
+        return cY;
+    }
+
+    public void setcY(float cY) {
+        this.cY = cY;
+    }
+
     public Mat apply(Mat mat) {
         Mat K = new Mat(3, 3, CvType.CV_32FC1);
         K.put(0, 0, new float[]{fishVal, 0, cX});
