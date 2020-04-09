@@ -68,7 +68,7 @@ public class Yolo implements Filter {
 
     private void postprocess(Mat frame, List<Mat> outs) {
 
-        List<Rect> tmpLocations = new ArrayList<>();
+        List<Rect2d> tmpLocations = new ArrayList<>();
         List<Integer> tmpClasses = new ArrayList<>();
         List<Float> tmpConfidences = new ArrayList<>();
 
@@ -95,7 +95,7 @@ public class Yolo implements Filter {
 
                     tmpClasses.add((int) result.maxLoc.x);
                     tmpConfidences.add((float) result.maxVal);
-                    tmpLocations.add(new Rect((int) left, (int) top, (int) width, (int) height));
+                    tmpLocations.add(new Rect2d((int) left, (int) top, (int) width, (int) height));
 
                 }
                 k += out.width();
@@ -105,10 +105,10 @@ public class Yolo implements Filter {
         annotateFrame(frame, tmpLocations, tmpClasses, tmpConfidences);
     }
 
-    private void annotateFrame(Mat frame, List<Rect> tmpLocations, List<Integer> tmpClasses,
+    private void annotateFrame(Mat frame, List<Rect2d> tmpLocations, List<Integer> tmpClasses,
                                List<Float> tmpConfidences) {
 
-        MatOfRect locMat = new MatOfRect();
+        MatOfRect2d locMat = new MatOfRect2d();
         MatOfFloat confidenceMat = new MatOfFloat();
         MatOfInt indexMat = new MatOfInt();
 
@@ -124,7 +124,7 @@ public class Yolo implements Filter {
         }
     }
 
-    public void processResults(Mat frame, List<Rect> tmpLocations, List<Integer> tmpClasses, MatOfInt indexMat) {
+    public void processResults(Mat frame, List<Rect2d> tmpLocations, List<Integer> tmpClasses, MatOfInt indexMat) {
 //        List<Integer> ints = indexMat.total() > MAX_RESULTS ? indexMat.toList().subList(0, MAX_RESULTS) : indexMat.toList();
 //         List<List> results = ints.stream().map(i-> {
 //             int idx = (int) indexMat.get(i, 0)[0];
@@ -146,7 +146,7 @@ public class Yolo implements Filter {
         for (int i = 0; i < indexMat.total() && i < MAX_RESULTS; ++i) {
             int idx = (int) indexMat.get(i, 0)[0];
             int labelId = tmpClasses.get(idx);
-            Rect box = tmpLocations.get(idx);
+            Rect2d box = tmpLocations.get(idx);
             String label = labels.get(labelId);
             results.add(Arrays.asList(box, label));
         }
