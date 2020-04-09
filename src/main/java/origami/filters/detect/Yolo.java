@@ -146,7 +146,8 @@ public class Yolo implements Filter {
         for (int i = 0; i < indexMat.total() && i < MAX_RESULTS; ++i) {
             int idx = (int) indexMat.get(i, 0)[0];
             int labelId = tmpClasses.get(idx);
-            Rect2d box = tmpLocations.get(idx);
+            Rect2d r_ = tmpLocations.get(idx);
+            Rect box = new Rect(r_.tl(), r_.br());
             String label = labels.get(labelId);
             results.add(Arrays.asList(box, label));
         }
@@ -156,7 +157,7 @@ public class Yolo implements Filter {
 
     public void annotateAll(Mat frame, List<List> results) {
         for (List result : results) {
-            annotateOne(frame, (Rect) result.get(0), (String) result.get(1));
+            annotateOne(frame, ((Rect) result.get(0)) , (String) result.get(1));
         }
     }
 
