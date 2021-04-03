@@ -6,14 +6,14 @@ import origami.Filter;
 
 public class ColorMap implements Filter {
     int color = 0;
-
-    public int getColor() {
-        return color;
-    }
-
-    public void setColor(int color) {
-        this.color = color;
-    }
+//
+//    public int getColor() {
+//        return color;
+//    }
+//
+//    public void setColor(int color) {
+//        this.color = color;
+//    }
 
     public ColorMap() {
 

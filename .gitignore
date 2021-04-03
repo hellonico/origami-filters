@@ -9,3 +9,7 @@ gradle.properties
 .project
 bin/
 .vscode
+.DS_Store
+.lsp/
+output/
+src/.DS_Store

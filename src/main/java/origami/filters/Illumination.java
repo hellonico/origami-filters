@@ -10,6 +10,22 @@ public class Illumination implements Filter {
     public float alpha = 3f;
     public float beta = 0.4f;
 
+    public float getAlpha() {
+        return alpha;
+    }
+
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
+    }
+
+    public float getBeta() {
+        return beta;
+    }
+
+    public void setBeta(float beta) {
+        this.beta = beta;
+    }
+
     @Override
     public Mat apply(Mat in) {
         Mat dst = new Mat();

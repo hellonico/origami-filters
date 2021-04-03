@@ -20,6 +20,7 @@ public class DynamicAnnotate extends Annotate {
     IFn eval = var("clojure.core", "eval");
     public DynamicAnnotate() {
         super();
+        super.setText("(str (java.util.Date.))");
     }
 
     @Override

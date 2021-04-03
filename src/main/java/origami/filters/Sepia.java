@@ -39,7 +39,7 @@ public abstract class Sepia implements Filter {
 
     Mat kernel = new Mat(3, 3, CvType.CV_32F);
 
-    public Sepia() {
+    private Sepia() {
 
     }
 
