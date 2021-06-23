@@ -37,7 +37,7 @@ public class EastTextDetector {
         // input image
         // Mat frame = Imgcodecs.imread("data/mdl/m2.jpg");
         // Core.bitwise_not(frame,frame);
-        // Imgproc.cvtColor(frame, frame, Imgproc.COLOR_RGBA2RGB);
+        Imgproc.cvtColor(frame, frame, Imgproc.COLOR_RGBA2RGB);
 
         Mat blob = Dnn.blobFromImage(frame, 1.0,siz, new Scalar(123.68, 116.78, 103.94), true, false);
         net.setInput(blob);
