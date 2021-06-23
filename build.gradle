@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: "maven-publish"
 
 group = 'origami'
-version = '1.21'
+version = '1.22'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -34,7 +34,6 @@ sourceSets {
 
 publishing {
 	publications {
-
 		maven(MavenPublication) {
             groupId "origami"
             artifactId "filters"
