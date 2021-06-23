@@ -9,6 +9,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class RunAllFilters {
@@ -16,6 +17,7 @@ public class RunAllFilters {
     public void sayHello() throws ClassNotFoundException, IllegalAccessException, InstantiationException, IOException {
         Origami.init();
         List<String> filters = FindFilters.findFilters();
+        Collections.sort(filters);
         FileWriter fw = new FileWriter("output/filters.md");
         BufferedWriter bw = new BufferedWriter(fw);
 
@@ -53,7 +55,7 @@ public class RunAllFilters {
 
                 bw.flush();
 
-//                Imgcodecs.imwrite("output/"+_f.getSimpleName()+".png", d);
+                Imgcodecs.imwrite("output/"+_f.getSimpleName()+".png", d);
 
             } catch(Exception e) {
                 e.printStackTrace();

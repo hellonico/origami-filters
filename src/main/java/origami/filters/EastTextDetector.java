@@ -5,6 +5,7 @@ import org.opencv.dnn.Dnn;
 import org.opencv.dnn.Net;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.utils.Converters;
+import origami.Filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  * https://www.pyimagesearch.com/2018/08/20/OpenCV-text-detection-east-text-detector/
  */
 
-public class EastTextDetector {
+public class EastTextDetector implements Filter {
     Net net;
 
     // forced by the network
