@@ -19,6 +19,62 @@ public class Cartoon implements Filter {
     public int blockSize = 9;
     public int C = 2;
 
+    public int getD() {
+        return d;
+    }
+
+    public void setD(int d) {
+        this.d = d;
+    }
+
+    public int getSigmaColor() {
+        return sigmaColor;
+    }
+
+    public void setSigmaColor(int sigmaColor) {
+        this.sigmaColor = sigmaColor;
+    }
+
+    public int getSigmaSpace() {
+        return sigmaSpace;
+    }
+
+    public void setSigmaSpace(int sigmaSpace) {
+        this.sigmaSpace = sigmaSpace;
+    }
+
+    public int getKsize() {
+        return ksize;
+    }
+
+    public void setKsize(int ksize) {
+        this.ksize = ksize;
+    }
+
+    public double getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(double maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public int getBlockSize() {
+        return blockSize;
+    }
+
+    public void setBlockSize(int blockSize) {
+        this.blockSize = blockSize;
+    }
+
+    public int getC() {
+        return C;
+    }
+
+    public void setC(int c) {
+        C = c;
+    }
+
     public Cartoon(int d, int sigmaColor, int sigmaSpace, int ksize, double maxValue, int blockSize, int c) {
         this.d = d;
         this.sigmaColor = sigmaColor;

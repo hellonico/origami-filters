@@ -21,7 +21,7 @@ public class MyYolo {
 
     public static class V3Tiny extends Yolo {
         public V3Tiny() {
-            super("networks.yolo:yolov3:1.0.0");
+            super("networks.yolo:yolov3-tiny:1.0.0");
         }
     }
     public static class V4 extends Yolo {

@@ -10,6 +10,7 @@ import static org.opencv.imgproc.Imgproc.THRESH_BINARY;
 
 public class Manga implements Filter {
 
+
     @Override
     public Mat apply(Mat mat) {
         Imgproc.cvtColor(mat,mat,COLOR_RGB2GRAY);

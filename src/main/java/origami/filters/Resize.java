@@ -48,7 +48,7 @@ public class Resize implements Filter {
         Size s = factor != -1 ?
                 new Size(frame.size().width * factor, frame.size().height * factor) :
                 new Size(width, height);
-        Mat target = new Mat(s,frame.type());
+        Mat target = new Mat();
         Imgproc.resize(frame, target, s);
         return target;
     }

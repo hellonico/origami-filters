@@ -5,7 +5,7 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 import origami.Filter;
 
-class Haar implements Filter {
+public class Haar implements Filter {
 
     private CascadeClassifier classifier;
     Scalar white = new Scalar(255, 255, 255);
