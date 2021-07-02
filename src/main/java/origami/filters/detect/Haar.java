@@ -3,16 +3,56 @@ package origami.filters.detect;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
+import origami.Dnn;
+import origami.Fetcher;
 import origami.Filter;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public class Haar implements Filter {
 
     private CascadeClassifier classifier;
     Scalar white = new Scalar(255, 255, 255);
     String text = "Gatos";
+    private String type;
 
-    public Haar(String path) {
-        classifier = new CascadeClassifier(path);
+    public Scalar getWhite() {
+        return white;
+    }
+
+    public void setWhite(Scalar white) {
+        this.white = white;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Haar() {
+
+    }
+
+    public void setType(String type) {
+        this.type = type;
+        String folder = Fetcher.fetchFromSpec("origami.artefacts:cascades:1.0.0");
+        File f = Objects.requireNonNull(new File(folder).listFiles())[0];
+        File[] files = f.listFiles();
+        File eye = Arrays.stream(files).filter(_f->_f.getName().contains(type)).findFirst().get();
+        this.setFile(eye.getAbsolutePath());
+    }
+    public String getType() {
+        return this.type;
+    }
+
+    public void setFile(String file) {
+        classifier = new CascadeClassifier(file);
     }
 
     public Mat apply(Mat input) {
@@ -25,5 +65,6 @@ public class Haar implements Filter {
         }
         return input;
     }
+
 }
 
