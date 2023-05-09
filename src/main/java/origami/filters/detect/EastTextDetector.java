@@ -1,4 +1,4 @@
-package origami.filters;
+package origami.filters.detect;
 
 import org.opencv.core.*;
 import org.opencv.dnn.Dnn;

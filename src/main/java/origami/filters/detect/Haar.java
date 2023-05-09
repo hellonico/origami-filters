@@ -42,7 +42,7 @@ public class Haar implements Filter, Detect {
     }
 
     public Haar() {
-
+        this.setType("haar.frontalcatface");
     }
 
     public void setType(String type) {

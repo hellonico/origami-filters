@@ -1,4 +1,4 @@
-package origami.filters;
+package origami.filters.cartoon;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Size;

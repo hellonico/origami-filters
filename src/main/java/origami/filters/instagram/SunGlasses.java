@@ -1,8 +1,9 @@
-package origami.filters;
+package origami.filters.instagram;
 
 import origami.Filter;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
+import origami.filters.Utils;
 
 import static org.opencv.core.Core.addWeighted;
 

@@ -1,4 +1,4 @@
-package origami.filters.detect;
+package origami.filters.detect.yolo;
 
 import org.opencv.core.*;
 import org.opencv.dnn.Dnn;
@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Yolo implements Filter {
-    final static Size sz = new Size(416, 416);
-    List<String> outBlobNames;
+//    final static Size sz = new Size(416, 416);
+//    List<String> outBlobNames;
     Net net;
     List<String> layers;
     List<String> labels;

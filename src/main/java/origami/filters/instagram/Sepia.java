@@ -1,4 +1,4 @@
-package origami.filters;
+package origami.filters.instagram;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;

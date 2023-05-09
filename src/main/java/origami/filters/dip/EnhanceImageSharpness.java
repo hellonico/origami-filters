@@ -12,7 +12,8 @@ public class EnhanceImageSharpness implements Filter {
     public Mat apply(Mat source) {
         Mat destination = new Mat(source.rows(), source.cols(), source.type());
         Imgproc.GaussianBlur(source, destination, new Size(1, 1), 10);
-        Core.addWeighted(source, 1.5, destination, -0.5, 0, destination);
-        return destination;
+        Mat result = new Mat(source.rows(), source.cols(), source.type());
+        Core.addWeighted(source, 1.5, destination, -0.5, 0, result);
+        return result;
     }
 }
