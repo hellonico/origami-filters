@@ -54,8 +54,7 @@ public class Yolo implements Filter {
 
     void findShapes(Mat frame) {
 
-        Mat blob = Dnn.blobFromImage(frame, IN_SCALE_FACTOR, new Size(IN_WIDTH, IN_HEIGHT), new Scalar(0, 0, 0),
-                SWAP_RGB);
+        Mat blob = Dnn.blobFromImage(frame, IN_SCALE_FACTOR, new Size(IN_WIDTH, IN_HEIGHT), new Scalar(0, 0, 0), SWAP_RGB);
         net.setInput(blob);
 
         List<Mat> outputs = new ArrayList<>();
@@ -105,8 +104,7 @@ public class Yolo implements Filter {
         annotateFrame(frame, tmpLocations, tmpClasses, tmpConfidences);
     }
 
-    private void annotateFrame(Mat frame, List<Rect2d> tmpLocations, List<Integer> tmpClasses,
-                               List<Float> tmpConfidences) {
+    private void annotateFrame(Mat frame, List<Rect2d> tmpLocations, List<Integer> tmpClasses, List<Float> tmpConfidences) {
 
         MatOfRect2d locMat = new MatOfRect2d();
         MatOfFloat confidenceMat = new MatOfFloat();
