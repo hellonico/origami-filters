@@ -20,6 +20,6 @@ public class Noise implements Filter {
         Core.randn(noise, mean.get(0,0)[0], dev.get(0,0)[0]);
         //Adding noise to the destination
         Core.add(src, noise, dst);
-        return src;
+        return dst;
     }
 }
