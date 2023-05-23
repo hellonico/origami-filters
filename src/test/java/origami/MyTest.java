@@ -32,12 +32,25 @@ public class MyTest {
 //                "{:class origami.filters.queen.Queen$BlackWhite}"
 //                "{:class origami.filters.queen.Queen :lower 10 :upper 30 :main \"#FFCC00\" :sub \"#aaCC00\"}"
 //                "{:class origami.filters.cartoon.Manga2}",
-                "{:class origami.filters.Histogram}",
+                //"{:class origami.filters.Histogram}",
+                //"{:class origami.filters.brandnew.MostColors}",
+//                "{:class origami.filters.inprogress.Kandinsky}",
+//                "{:class origami.filters.inprogress.Kandinsky2}",
+                // "{:class origami.filters.FakeHDR, :gamma 1.2, :intensity 1.0, :colorAdaptation 130.0, :lightAdaptation 2.5}",
+//                "{:class origami.filters.Ghost}",
+                "{:class origami.filters.inprogress.Picasso}",
+//                "{:class origami.filters.NoOP}",
+
         };
         for (String filter : filters) {
             Filter f = Origami.StringToFilter(filter);
             imwrite("build/"+f.getClass().getSimpleName()+".png", f.apply(Marcel));
         }
+
+//        tonemapper.setGamma(1.2f);
+//        tonemapper.setIntensity(1f);
+//        tonemapper.setColorAdaptation(130.0f);
+//        tonemapper.setLightAdaptation(0.5f);
 
     }
 }
