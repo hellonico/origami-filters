@@ -5,8 +5,8 @@ apply plugin: "maven-publish"
 group = 'origami'
 version = '1.39'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
@@ -15,13 +15,13 @@ repositories {
 	maven { url "https://repo1.maven.org/maven2/" }
 	maven { url "https://repo.clojars.org/" }
 	maven { url "https://repository.hellonico.info/repository/hellonico/" }
+	mavenLocal()
 }
 dependencies {
-	compile group: 'origami', name: 'origami', version:'4.7.0-8'
-	compile group: 'org.clojure', name: 'clojure', version:'1.10.0'
-	compile 'io.github.classgraph:classgraph:4.8.65'
+	implementation group: 'origami', name: 'origami', version:'4.7.0-13-SNAPSHOT'
+	implementation group: 'org.clojure', name: 'clojure', version:'1.10.0'
+	implementation 'io.github.classgraph:classgraph:4.8.65'
 	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-
 }
 
 sourceSets {
