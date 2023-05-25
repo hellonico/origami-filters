@@ -1,4 +1,4 @@
-package origami.filters.inprogress;
+package origami.filters.brandnew;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
@@ -65,14 +65,18 @@ public class Picasso extends FilterWithPalette implements Filter {
         this.bgColor = HTML.toScalar(bgColor);
     }
 
-    double cannyLow = 1;
-    double cannyHigh = 250;
+    public double cannyLow = 1;
+    public double cannyHigh = 250;
 
-    int kernelSize = 71;
-    int sigma = 0;
-    int numShapes = 15;
+    public int kernelSize = 71;
+    public int sigma = 0;
+    public int numShapes = 15;
 
-    Scalar bgColor = HTML.toScalar("#ffffff");
+    public Scalar bgColor = HTML.toScalar("#ffffff");
+
+    public Picasso() {
+        super();
+    }
 
     @Override
     public Mat apply(Mat inputImage) {
@@ -115,10 +119,7 @@ public class Picasso extends FilterWithPalette implements Filter {
         int numContoursToDraw = Math.min(contours.size(), numShapes);
         for (int i = 0; i < numContoursToDraw; i++) {
             MatOfPoint contour = contours.get(i);
-
-//            Scalar color = new Scalar(0, 0, 255);
             Scalar color = palette.ratioColor((double) i /numContoursToDraw);
-//            Scalar color = palette.ratioColor(contour.size()/ima);
             Imgproc.drawContours(resultImage, Collections.singletonList(contour), -1, color, Imgproc.FILLED);
         }
 

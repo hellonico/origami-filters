@@ -1,15 +1,13 @@
-package origami.filters.queen;
+package origami.filters.brandnew.queen;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import origami.Filter;
 import origami.colors.HTML;
-import origami.colors.RGB;
 
-public class Queen implements Filter {
+public abstract class Queen implements Filter {
     Scalar main;
     Scalar sub;
 

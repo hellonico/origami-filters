@@ -156,8 +156,8 @@ public class FindFilters {
     public static void main(String... args) {
         Origami.init();
         String output = args.length >= 1 ? args[0] : "output";
-        //String matPath = args.length >= 2 ? args[1] : FindFilters.class.getClassLoader().getResource("marcel.jpg").getPath();
-//        generateFilterDoc(output,matPath);
-        generateEDNWithAllFilters(output + "/filters.edn");
+        String matPath = args.length >= 2 ? args[1] : FindFilters.class.getClassLoader().getResource("marcel.jpg").getPath();
+        generateFilterDoc(output,matPath);
+//        generateEDNWithAllFilters(output + "/filters.edn");
     }
 }

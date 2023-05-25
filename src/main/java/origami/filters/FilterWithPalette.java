@@ -4,8 +4,12 @@ import origami.colors.Palette;
 
 public abstract class FilterWithPalette {
 
-    String paletteName;
-    boolean paletteReversed = false;
+    public FilterWithPalette() {
+        this.setPaletteName("sunrise");
+    }
+
+    public String paletteName;
+    public boolean paletteReversed = false;
 
     public Palette palette;
 
