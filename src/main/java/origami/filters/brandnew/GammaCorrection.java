@@ -8,7 +8,7 @@ import origami.annotations.Usage;
 
 @Usage(description = "Gamma Correction")
 public class GammaCorrection implements Filter {
-    float gamma = 0.0f;
+    float gamma = 0.1f;
 
     public float getGamma() {
         return gamma;
