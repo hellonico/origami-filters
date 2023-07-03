@@ -1,4 +1,4 @@
-package origami;
+package origami.utils;
 
 import java.util.ArrayList;
 import java.util.List;

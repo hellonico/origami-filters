@@ -5,6 +5,7 @@ import org.opencv.imgproc.Imgproc;
 import origami.Filter;
 import origami.colors.HTML;
 import origami.colors.RGB;
+import origami.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,7 +4,7 @@ import org.opencv.core.Mat;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import origami.Filter;
-import origami.filters.Utils;
+import origami.utils.Utils;
 
 public class GaussianFilter implements Filter {
 
@@ -16,7 +16,7 @@ public class GaussianFilter implements Filter {
     }
 
     public void setSize(String size) {
-        this.size = origami.filters.Utils.String_Size(size);
+        this.size = Utils.String_Size(size);
     }
 
     public int getSigmaX() {

@@ -7,6 +7,7 @@ import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
 import static clojure.java.api.Clojure.var;
+import static org.opencv.imgproc.Imgproc.*;
 
 public class DynamicAnnotate extends Annotate {
     static IFn EDN_READ_STRING;
@@ -26,7 +27,7 @@ public class DynamicAnnotate extends Annotate {
     @Override
     public Mat apply(Mat mat) {
         String text2 = eval.invoke(EDN_READ_STRING.invoke(text)).toString();
-        Imgproc.putText(mat, text2, point, fontFace, fontSize, color, thickness);
+        putText(mat, text2, point, fontFace, fontSize, color, thickness);
         return mat;
     }
 }

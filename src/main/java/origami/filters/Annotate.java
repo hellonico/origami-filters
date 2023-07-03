@@ -3,18 +3,19 @@ package origami.filters;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
 import origami.Filter;
 
-import static origami.filters.Utils.*;
+import static org.opencv.imgproc.Imgproc.*;
+import static origami.colors.HTML.*;
+import static origami.utils.Utils.*;
 
 public class Annotate implements Filter {
     String text = "hello";
     Point point = new Point(50, 50);
     double fontSize = 3.0;
-    Scalar color = new Scalar(255, 255, 255);
+    Scalar color = toScalar("White");
     int thickness = 3;
-    int fontFace = Imgproc.FONT_HERSHEY_PLAIN;
+    int fontFace = FONT_HERSHEY_PLAIN;
 
     public void setPoint(String point) {
         Point p = String_Point(point);
@@ -34,11 +35,11 @@ public class Annotate implements Filter {
     }
 
     public void setColor(String color) {
-        this.color = String_Scalar(color);
+        this.color = toScalar(color);
     }
 
     public String getColor() {
-        return Scalar_String(this.color);
+        return toHTML(this.color);
     }
 
     public void setThickness(int thickness) {
@@ -60,7 +61,7 @@ public class Annotate implements Filter {
 
     @Override
     public Mat apply(Mat mat) {
-        Imgproc.putText(mat, text, point, fontFace, fontSize, color, thickness);
+        putText(mat, text, point, fontFace, fontSize, color, thickness);
         return mat;
     }
 }

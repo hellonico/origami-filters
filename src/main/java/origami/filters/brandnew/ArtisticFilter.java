@@ -2,7 +2,7 @@ package origami.filters.brandnew;
 
 import org.opencv.core.*;
 import origami.Filter;
-import origami.filters.Utils;
+import origami.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

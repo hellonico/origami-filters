@@ -4,12 +4,13 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
 import origami.Filter;
 import origami.colors.HTML;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.opencv.imgproc.Imgproc.*;
 
 public class RedBlack implements Filter {
     String color0 = "black";
@@ -22,8 +23,8 @@ public class RedBlack implements Filter {
         this.color0 = color0;
     }
 
-    String color1 = "red";
-    String color2 = "grey";
+    String color1 = "red_1";
+    String color2 = "gray";
 
     public String getColor1() {
         return color1;
@@ -55,7 +56,7 @@ public class RedBlack implements Filter {
     public Mat apply(Mat image) {
 
         Mat reducedColors = new Mat();
-        Imgproc.cvtColor(image, reducedColors, Imgproc.COLOR_BGR2HSV);
+        cvtColor(image, reducedColors, COLOR_BGR2HSV);
 
         // Define the color ranges
         Scalar lowerBlack = new Scalar(0, 0, 0);
@@ -87,29 +88,29 @@ public class RedBlack implements Filter {
 
         // Convert the result to grayscale
         Mat gray = new Mat();
-        Imgproc.cvtColor(result, gray, Imgproc.COLOR_BGR2GRAY);
+        cvtColor(result, gray, COLOR_BGR2GRAY);
 
         // Apply a threshold to segment the main shape
         Mat threshold = new Mat();
-        Imgproc.threshold(gray, threshold, 1, 255, Imgproc.THRESH_BINARY);
+        threshold(gray, threshold, 1, 255, THRESH_BINARY);
 
         // Find contours of the shapes
         List<MatOfPoint> contours = new ArrayList<>();
         Mat hierarchy = new Mat();
-        Imgproc.findContours(threshold, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        findContours(threshold, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 
         // Find the largest contour
         double maxArea = -1;
         int maxAreaIdx = -1;
         for (int i = 0; i < contours.size(); i++) {
-            double area = Imgproc.contourArea(contours.get(i));
+            double area = contourArea(contours.get(i));
             if (area > maxArea) {
                 maxArea = area;
                 maxAreaIdx = i;
             }
         }
         // Draw the contours of the largest shape with a thick line
-        Imgproc.drawContours(result, contours, maxAreaIdx, HTML.toScalar(contourColor), 4);
+        drawContours(result, contours, maxAreaIdx, HTML.toScalar(contourColor), 4);
 
 
         return result;

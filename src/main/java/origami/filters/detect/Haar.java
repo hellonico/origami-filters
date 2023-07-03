@@ -1,18 +1,16 @@
 package origami.filters.detect;
 
 import org.opencv.core.*;
-import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 import origami.Detect;
-import origami.Fetcher;
 import origami.Filter;
+import origami.utils.Utils;
 
-import java.io.File;
 import java.util.List;
-import java.util.Objects;
 
-import static origami.filters.Utils.Scalar_String;
-import static origami.filters.Utils.String_Scalar;
+import static org.opencv.imgproc.Imgproc.*;
+import static origami.utils.Utils.Scalar_String;
+import static origami.utils.Utils.String_Scalar;
 
 public class Haar implements Filter, Detect {
 
@@ -47,28 +45,19 @@ public class Haar implements Filter, Detect {
 
     public void setType(String type) {
         this.type = type;
-        String[] typeAndFile = type.split("\\.");
-        String folder = Fetcher.fetchFromSpec("origami.artefacts:cascades:1.0.0");
-        File _eye = Objects.requireNonNull(new File(folder).listFiles((dir, name) -> name.contains(typeAndFile[0])))[0];
-        File eye = Objects.requireNonNull(_eye.listFiles((dir, name) -> name.contains(typeAndFile[1])))[0];
-        this.setFile(eye.getAbsolutePath());
+        classifier = Utils.loadCascadeClassifier(type);
     }
 
     public String getType() {
         return this.type;
     }
 
-    public void setFile(String file) {
-        System.out.println("Classifier set to " + file);
-        classifier = new CascadeClassifier(file);
-    }
-
     public Mat apply(Mat input) {
         List<Rect> faces = detectROI(input);
 
         for (Rect rect : faces) {
-            Imgproc.putText(input, text, new Point(rect.x, rect.y - 5), 3, 3, color, 5);
-            Imgproc.rectangle(input, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height),
+            putText(input, text, new Point(rect.x, rect.y - 5), 3, 3, color, 5);
+            rectangle(input, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height),
                     color, 5);
         }
         return input;
@@ -79,7 +68,6 @@ public class Haar implements Filter, Detect {
         classifier.detectMultiScale(input, faces, scaleFactor, minNeighbors, -1, minSize, maxSize);
         return faces.toList();
     }
-
 
 }
 
