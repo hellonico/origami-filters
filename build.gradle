@@ -4,7 +4,7 @@ apply plugin: 'kotlin'
 apply plugin: "maven-publish"
 
 group = 'origami'
-version = '1.41'
+version = '1.42'
 
 sourceCompatibility = 11
 targetCompatibility = 11
