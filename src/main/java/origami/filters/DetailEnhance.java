@@ -27,6 +27,7 @@ public class DetailEnhance implements Filter {
 
     @Override
     public Mat apply(Mat src) {
+
         Mat dst = new Mat();
         detailEnhance(src, dst, sigma_s, sigma_r);
         return dst;

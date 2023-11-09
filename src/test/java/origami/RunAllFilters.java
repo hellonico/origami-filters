@@ -34,6 +34,7 @@ public class RunAllFilters {
             try {
                 Class<?> _f = Class.forName(f);
                 Filter __f = (Filter) _f.newInstance();
+                System.out.println("Loading:"+_f.getSimpleName());
 
                 Mat c = m.clone();
                 Mat d = __f.apply(c);
