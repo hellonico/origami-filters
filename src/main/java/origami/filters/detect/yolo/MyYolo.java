@@ -1,5 +1,6 @@
 package origami.filters.detect.yolo;
 
+import origami.Filter;
 import origami.filters.detect.yolo.Yolo;
 import origami.filters.detect.yolo.YoloV6;
 
