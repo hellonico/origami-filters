@@ -5,11 +5,14 @@ import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
+import origami.annotations.Parameter;
+import origami.annotations.Usage;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.util.Collections;
-import java.util.List;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FindFilters {
@@ -44,21 +47,44 @@ public class FindFilters {
             Collections.sort(filters);
             FileWriter fw = new FileWriter(path);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("[");
+            bw.write("[\n");
             for (String f : filters) {
                 try {
                     Class<?> _f = Class.forName(f);
+                    if(Modifier.isAbstract(_f.getModifiers())) {
+                        continue;
+                    }
+
                     Filter __f = (Filter) _f.newInstance();
 
-                    bw.newLine();
+                    Object[] us = Arrays.stream(_f.getAnnotations()).filter(a -> a.annotationType().equals(Usage.class)).toArray();
+                    for(Object u : us) {
+                        bw.append(";");
+                        bw.append(((Usage) u).description());
+                        bw.newLine();
+                    }
+
+                    for (Field field : _f.getDeclaredFields()) {
+                        field.setAccessible(true);
+                        if (field.isAnnotationPresent(Parameter.class)) {
+                            String description = ((Parameter) field.getAnnotationsByType(Parameter.class)[0]).description();
+                            bw.append(";");
+                            bw.append(description);
+                            bw.newLine();
+                        }
+                    }
+
                     bw.append(";");
                     bw.write(Origami.FilterToString(__f));
+                    bw.newLine();
+                    bw.newLine();
                 } catch (Exception e) {
-                    System.out.println("Cannot load:" + f);
+                    //e.printStackTrace();
+                    System.out.println("FAILED:" + f.getClass() + "{"+f+"}");
                 }
             }
             bw.newLine();
-            bw.write("]");
+            bw.write("]\n");
             bw.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -128,9 +154,10 @@ public class FindFilters {
     }
 
     public static void main(String... args) {
+        Origami.init();
         String output = args.length >= 1 ? args[0] : "output";
-        String matPath = args.length >= 2 ? args[1] : FindFilters.class.getClassLoader().getResource("marcel.jpg").getPath();
-        generateFilterDoc(output,matPath);
+        //String matPath = args.length >= 2 ? args[1] : FindFilters.class.getClassLoader().getResource("marcel.jpg").getPath();
+//        generateFilterDoc(output,matPath);
         generateEDNWithAllFilters(output + "/filters.edn");
     }
 }
