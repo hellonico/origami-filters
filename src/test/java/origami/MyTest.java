@@ -30,7 +30,8 @@ public class MyTest {
 //                "{:class origami.filters.queen.Queen$Roger}",
 //                "{:class origami.filters.queen.HotSpace}",
 //                "{:class origami.filters.queen.Queen$BlackWhite}"
-                "{:class origami.filters.queen.Queen :lower 10 :upper 30 :main \"#FFCC00\" :sub \"#aaCC00\"}"
+//                "{:class origami.filters.queen.Queen :lower 10 :upper 30 :main \"#FFCC00\" :sub \"#aaCC00\"}"
+                "{:class origami.filters.cartoon.Manga2}",
         };
         for (String filter : filters) {
             Filter f = Origami.StringToFilter(filter);

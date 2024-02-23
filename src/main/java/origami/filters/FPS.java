@@ -7,22 +7,22 @@ import origami.Filter;
 import static org.opencv.imgproc.Imgproc.FONT_HERSHEY_PLAIN;
 import static org.opencv.imgproc.Imgproc.putText;
 
-public class FPS implements Filter {
+public class FPS extends Annotate implements Filter {
 
     long start = System.currentTimeMillis();
     int count = 0;
 
-    public Point org = new Point(50, 50);
-    public int fontFace = FONT_HERSHEY_PLAIN;
-    public double fontScale = 2.0;
-    public Scalar color = new Scalar(0, 0, 0);
-    public int thickness = 2;
-
     @Override
     public Mat apply(Mat in) {
         count++;
-        String text = "FPS: " + count / (1 + ((System.currentTimeMillis() - start) / 1000));
-        putText(in, text, org, fontFace, fontScale, color, thickness);
-        return in;
+        if(count > 10) {
+            long end = System.currentTimeMillis();
+            long fps = (end - start ) / 10000;
+            setText("FPS: "+fps);
+            // reset
+            start = end;
+            count = 0;
+        }
+        return super.apply(in);
     }
 }
