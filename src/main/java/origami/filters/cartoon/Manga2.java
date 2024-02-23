@@ -6,14 +6,14 @@ import origami.Filter;
 import origami.colors.HTML;
 import origami.colors.Palette;
 import origami.colors.RGB;
+import origami.filters.FilterWithPalette;
 
 import java.util.*;
 
 import static org.opencv.imgproc.Imgproc.*;
 
-public class Manga2 implements Filter {
+public class Manga2 extends FilterWithPalette implements Filter {
 
-    private String paletteName;
     private double kernelSize = 17;
     private double cannyLow = 5;
     private double cannyHigh = 100;
@@ -22,15 +22,6 @@ public class Manga2 implements Filter {
     private double sigmaColor = 30;
     private double sigmaSpace = 75;
 
-
-    public void setPaletteName(String name) {
-        this.paletteName = name;
-        palette = Palette.get(paletteName, true);
-    }
-
-    public String getPaletteName() {
-        return paletteName;
-    }
 
     public double getKernelSize() {
         return kernelSize;
@@ -81,9 +72,8 @@ public class Manga2 implements Filter {
     }
 
     public Manga2() {
-        this.setPaletteName("sunrise2");
+        super();
     }
-
 
     public Mat apply(Mat inputImage) {
         // Convert the image to grayscale
@@ -132,20 +122,11 @@ public class Manga2 implements Filter {
 
             // Draw the filled polygon on the manga image
 
-            fillPoly(mangaImage, Collections.singletonList(polygon), randomColorFromPalette(inputImage.size().area(), boundingRect.size.area()));
+            fillPoly(mangaImage, Collections.singletonList(polygon), palette.ratioColor(boundingRect.size.area()/inputImage.size().area()));
 
         }
 
         return mangaImage;
     }
 
-    List<String> palette;
-
-
-    private Scalar randomColorFromPalette(double mat, double bounding) {
-        int size = palette.size() - 1;
-        double p = bounding / mat;
-        int randomElement = (int) (size * p);
-        return HTML.toScalar(palette.get(randomElement));
-    }
 }
