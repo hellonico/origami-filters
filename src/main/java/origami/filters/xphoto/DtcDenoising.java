@@ -31,7 +31,5 @@ public class DtcDenoising implements Filter {
     public Mat apply(Mat mat) {
         Xphoto.dctDenoising(mat, mat, sigma, psize);
         return mat;
-
-
     }
 }

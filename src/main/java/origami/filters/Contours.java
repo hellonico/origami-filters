@@ -3,13 +3,15 @@ package origami.filters;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import origami.Filter;
+import origami.colors.HTML;
+import origami.colors.RGB;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Contours implements Filter {
     private int threshold = 100;
-    Scalar color = new Scalar(256, 150, 0);
+    Scalar color = RGB.cyan_2;
     int thickness = 2;
     int linetype = 8;
     private Point offset = new Point();
@@ -31,11 +33,11 @@ public class Contours implements Filter {
     }
 
     public String getColor() {
-        return Utils.Scalar_String(color);
+        return HTML.toHTML(color);
     }
 
     public void setColor(String color) {
-        this.color = Utils.String_Scalar(color);
+        this.color = HTML.toScalar(color);
     }
 
     public int getThickness() {
@@ -58,7 +60,7 @@ public class Contours implements Filter {
         Mat cannyOutput = new Mat();
         Mat srcGray = new Mat();
         Imgproc.cvtColor(srcImage, srcGray, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.Canny(srcGray, cannyOutput, threshold, threshold * 2);
+        Imgproc.Canny(srcGray, cannyOutput, threshold, Math.max(threshold * 2,255));
         List<MatOfPoint> contours = new ArrayList<>();
         Mat hierarchy = new Mat();
         Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
