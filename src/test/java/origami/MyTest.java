@@ -31,15 +31,16 @@ public class MyTest {
 //                "{:class origami.filters.queen.HotSpace}",
 //                "{:class origami.filters.queen.Queen$BlackWhite}"
 //                "{:class origami.filters.queen.Queen :lower 10 :upper 30 :main \"#FFCC00\" :sub \"#aaCC00\"}"
-//                "{:class origami.filters.cartoon.Manga2}",
-                //"{:class origami.filters.Histogram}",
+//                "{:class origami.filters.brandnew.Manga2}",
+                //"{:class origami.filters.brandnew.Histogram}",
                 //"{:class origami.filters.brandnew.MostColors}",
 //                "{:class origami.filters.inprogress.Kandinsky}",
 //                "{:class origami.filters.inprogress.Kandinsky2}",
-                // "{:class origami.filters.FakeHDR, :gamma 1.2, :intensity 1.0, :colorAdaptation 130.0, :lightAdaptation 2.5}",
-//                "{:class origami.filters.Ghost}",
-                "{:class origami.filters.inprogress.Picasso}",
+                // "{:class origami.filters.brandnew.FakeHDR, :gamma 1.2, :intensity 1.0, :colorAdaptation 130.0, :lightAdaptation 2.5}",
+//                "{:class origami.filters.brandnew.Ghost}",
+//                "{:class origami.filters.brandnew.Picasso}",
 //                "{:class origami.filters.NoOP}",
+                "{:class origami.filters.brandnew.PinkForeground}",
 
         };
         for (String filter : filters) {

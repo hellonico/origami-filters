@@ -1,4 +1,4 @@
-package origami.filters.instagram;
+package origami.filters.brandnew;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -13,7 +13,7 @@ import static org.opencv.core.Core.*;
 import static org.opencv.imgproc.Imgproc.*;
 
 public class HighContrast implements Filter {
-    double alpha = 1.5;
+    public double alpha = 1.5;
 
     public double getAlpha() {
         return alpha;

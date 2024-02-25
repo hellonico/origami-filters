@@ -1,4 +1,4 @@
-package origami.filters.cartoon;
+package origami.filters.brandnew;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
@@ -14,13 +14,13 @@ import static org.opencv.imgproc.Imgproc.*;
 
 public class Manga2 extends FilterWithPalette implements Filter {
 
-    private double kernelSize = 17;
-    private double cannyLow = 5;
-    private double cannyHigh = 100;
+    public double kernelSize = 17;
+    public double cannyLow = 5;
+    public double cannyHigh = 100;
 
-    private double filterD = 3;
-    private double sigmaColor = 30;
-    private double sigmaSpace = 75;
+    public double filterD = 3;
+    public double sigmaColor = 30;
+    public double sigmaSpace = 75;
 
 
     public double getKernelSize() {

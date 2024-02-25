@@ -1,4 +1,4 @@
-package origami.filters;
+package origami.filters.brandnew;
 
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
@@ -16,9 +16,9 @@ public class CrackedPaper implements Filter {
 
     String paper;
 
-    double alpha = 0.5;
+    public double alpha = 0.5;
 
-    double beta = 0.5;
+    public double beta = 0.5;
 
     public double getGamma() {
         return gamma;
@@ -28,7 +28,7 @@ public class CrackedPaper implements Filter {
         this.gamma = gamma;
     }
 
-    private double gamma= 0;
+    public double gamma = 0;
 
     public double getAlpha() {
         return alpha;

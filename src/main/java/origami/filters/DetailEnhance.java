@@ -6,8 +6,8 @@ import static org.opencv.photo.Photo.detailEnhance;
 import origami.Filter;
 
 public class DetailEnhance implements Filter {
-    float sigma_s = 10;
-    float sigma_r = 0.15f;
+    public float sigma_s = 10;
+    public float sigma_r = 0.15f;
 
     public float getSigma_s() {
         return sigma_s;
