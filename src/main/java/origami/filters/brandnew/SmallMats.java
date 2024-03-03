@@ -6,7 +6,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import origami.Filter;
-import origami.FixedSizeList;
+import origami.utils.FixedSizeList;
 
 public class SmallMats implements Filter {
 

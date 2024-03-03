@@ -3,11 +3,9 @@ package origami.filters.brandnew;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import origami.Filter;
-import origami.colors.HTML;
-import origami.filters.Utils;
+import origami.utils.Utils;
 
 import static org.opencv.core.CvType.*;
-import static org.opencv.imgproc.Imgproc.*;
 
 public class Brushed implements Filter {
     int blockSize = 35;
