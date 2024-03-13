@@ -41,7 +41,7 @@ public class MyTest {
 //                "{:class origami.filters.brandnew.Picasso}",
 //                "{:class origami.filters.NoOP}",
 //                "{:class origami.filters.brandnew.PinkForeground}",
-                "{:class origami.filters.inprogress.ArtisticImpressionistFilter}",
+                "{:class origami.filters.brandnew.Shepard}",
 
         };
         for (String filter : filters) {

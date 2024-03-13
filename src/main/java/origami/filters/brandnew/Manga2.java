@@ -22,7 +22,6 @@ public class Manga2 extends FilterWithPalette implements Filter {
     public double sigmaColor = 30;
     public double sigmaSpace = 75;
 
-
     public double getKernelSize() {
         return kernelSize;
     }
