@@ -1,9 +1,9 @@
 apply plugin: 'java'
-apply plugin: 'maven'
+//apply plugin: 'maven'
 apply plugin: "maven-publish"
 
 group = 'origami'
-version = '1.40'
+version = '1.41'
 
 sourceCompatibility = 11
 targetCompatibility = 11
