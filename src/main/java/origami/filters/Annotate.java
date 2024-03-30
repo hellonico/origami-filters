@@ -13,7 +13,7 @@ public class Annotate implements Filter {
     String text = "hello";
     Point point = new Point(50, 50);
     double fontSize = 3.0;
-    Scalar color = toScalar("White");
+    Scalar color = toScalar("white");
     int thickness = 3;
     int fontFace = FONT_HERSHEY_PLAIN;
 

@@ -7,7 +7,9 @@ import origami.Filter
 import origami.utils.Utils
 
 class RotateWithMatrix : Filter {
+    @JvmField
     var rotationAngle = 10.0
+    @JvmField
     var scale = 1.0
     var point = Point(50.0, 50.0)
 

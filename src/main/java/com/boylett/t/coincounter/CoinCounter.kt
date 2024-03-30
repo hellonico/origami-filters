@@ -9,6 +9,7 @@ import origami.colors.HTML
 class CoinCounter : Filter {
     @JvmField
     var last: List<RotatedRect> = ArrayList()
+    @JvmField
     var color = "white"
     private var ed = EllipseDetection.Builder().build()
 
