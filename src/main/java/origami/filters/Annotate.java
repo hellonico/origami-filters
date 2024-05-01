@@ -17,6 +17,8 @@ public class Annotate implements Filter {
     int thickness = 3;
     int fontFace = FONT_HERSHEY_PLAIN;
 
+    boolean wrap = true;
+
     public void setPoint(String point) {
         Point p = String_Point(point);
         this.point = p;
@@ -61,7 +63,17 @@ public class Annotate implements Filter {
 
     @Override
     public Mat apply(Mat mat) {
-        putText(mat, text, point, fontFace, fontSize, color, thickness);
+        if (wrap) {
+            String[] lines = text.split("\\r?\\n");
+            for (int i = 0; i < lines.length; i++) {
+                Point p = point.clone();
+                p.y = point.y + fontSize * 20 * i;
+                putText(mat, lines[i], p, fontFace, fontSize, color, thickness);
+            }
+        } else {
+            putText(mat, text, point, fontFace, fontSize, color, thickness);
+        }
+
         return mat;
     }
 }
