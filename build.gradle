@@ -20,8 +20,8 @@ repositories {
     mavenCentral()
 }
 dependencies {
-	implementation group: 'origami', name: 'origami', version:'4.7.0-16'
-	implementation group: 'org.clojure', name: 'clojure', version:'1.10.0'
+	implementation group: 'origami', name: 'origami', version:'4.9.0-0'
+	implementation group: 'org.clojure', name: 'clojure', version:'1.11.3'
 	implementation 'io.github.classgraph:classgraph:4.8.65'
 	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
