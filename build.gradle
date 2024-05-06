@@ -76,3 +76,8 @@ compileTestKotlin {
         jvmTarget = "11"
     }
 }
+
+task generateDoc(type: JavaExec) {
+	main = 'origami.FindFilters' // Replace 'com.example.MainClass' with the fully qualified name of your main class
+	classpath = sourceSets.main.runtimeClasspath
+}

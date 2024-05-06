@@ -41,7 +41,12 @@ public class MyTest {
 //                "{:class origami.filters.brandnew.Picasso}",
 //                "{:class origami.filters.NoOP}",
 //                "{:class origami.filters.brandnew.PinkForeground}",
-                "{:class origami.filters.inprogress.Waves}",
+//                "{:class origami.filters.inprogress.Waves}",
+                  "{:class origami.filters.video.VHS}",
+                  "{:class origami.filters.video.VHSEnhanced}",
+                "{:class origami.filters.video.OldFilm}",
+                "{:class origami.filters.video.Terminator}",
+                "{:class origami.filters.video.EarlyDaysOfColorTV}",
 
         };
         for (String filter : filters) {

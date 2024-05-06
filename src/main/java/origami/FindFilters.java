@@ -9,9 +9,12 @@ import origami.annotations.Parameter;
 import origami.annotations.Usage;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -51,14 +54,14 @@ public class FindFilters {
             for (String f : filters) {
                 try {
                     Class<?> _f = Class.forName(f);
-                    if(Modifier.isAbstract(_f.getModifiers())) {
+                    if (Modifier.isAbstract(_f.getModifiers())) {
                         continue;
                     }
 
                     Filter __f = (Filter) _f.newInstance();
 
                     Object[] us = Arrays.stream(_f.getAnnotations()).filter(a -> a.annotationType().equals(Usage.class)).toArray();
-                    for(Object u : us) {
+                    for (Object u : us) {
                         bw.append(";");
                         bw.append(((Usage) u).description());
                         bw.newLine();
@@ -80,7 +83,7 @@ public class FindFilters {
                     bw.newLine();
                 } catch (Exception e) {
                     //e.printStackTrace();
-                    System.out.println("FAILED:" + f.getClass() + "{"+f+"}");
+                    System.out.println("FAILED:" + f.getClass() + "{" + f + "}");
                 }
             }
             bw.newLine();
@@ -91,13 +94,27 @@ public class FindFilters {
         }
     }
 
+    static String outputDate() {
+        // Get the current date and time
+        LocalDateTime now = LocalDateTime.now();
+
+        // Define a custom date-time formatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy 'at' h:mm a");
+
+        // Format the date-time using the formatter
+        return now.format(formatter);
+    }
+
     public static void generateFilterDoc(String outputDir, String matPath) {
+        System.out.printf("Generating filters documentation: %s\n", outputDate());
         try {
             List<String> filters = FindFilters.findFilters();
             Collections.sort(filters);
+            if (!new File(outputDir).exists()) {
+                new File(outputDir).mkdirs();
+            }
             FileWriter fw = new FileWriter(outputDir + "/filters.md");
             BufferedWriter bw = new BufferedWriter(fw);
-
 
             Mat m = Imgcodecs.imread(matPath, Imgcodecs.IMREAD_REDUCED_COLOR_8);
 
@@ -114,7 +131,10 @@ public class FindFilters {
                     System.out.println("Loading:" + _f.getSimpleName());
 
                     Mat c = m.clone();
+
+                    long startTime = System.currentTimeMillis();
                     Mat d = __f.apply(c);
+                    long endTime = System.currentTimeMillis();
 
                     bw.write("# " + _f.getSimpleName());
                     bw.newLine();
@@ -130,10 +150,13 @@ public class FindFilters {
                     bw.newLine();
                     bw.write("![](" + _f.getSimpleName() + ".png" + ")");
                     bw.newLine();
+                    bw.write(String.format("Execution Time: %d ms", endTime - startTime));
+                    bw.newLine();
 
                     bw.flush();
 
                     Imgcodecs.imwrite(outputDir + "/" + _f.getSimpleName() + ".png", d);
+                    System.out.printf("Filter %s executed in %d ms\n", _f.getSimpleName(), endTime - startTime);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -143,6 +166,7 @@ public class FindFilters {
             }
 
             bw.close();
+            System.out.printf("Finished: %s\n", outputDate());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -157,7 +181,7 @@ public class FindFilters {
         Origami.init();
         String output = args.length >= 1 ? args[0] : "output";
         String matPath = args.length >= 2 ? args[1] : FindFilters.class.getClassLoader().getResource("marcel.jpg").getPath();
-        generateFilterDoc(output,matPath);
+        generateFilterDoc(output, matPath);
 //        generateEDNWithAllFilters(output + "/filters.edn");
     }
 }
