@@ -4,6 +4,7 @@ import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
 import org.opencv.core.Mat;
+import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import origami.annotations.Parameter;
 import origami.annotations.Usage;
@@ -11,6 +12,7 @@ import origami.annotations.Usage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.time.LocalDateTime;
@@ -105,6 +107,102 @@ public class FindFilters {
         return now.format(formatter);
     }
 
+    static String getFilterName(Filter f) {
+        return getFilterName(f.getClass().getName());
+    }
+    static String getFilterName(String f) {
+        return f.replace("origami.filters.", "").replace("$", ".").toLowerCase();
+    }
+
+    public static void generateOverview(String outputDir, String matPath) {
+        List<String> filters = FindFilters.findFilters();
+        Collections.sort(filters);
+        int size = filters.size();
+
+        try {
+            FileWriter fw2 = new FileWriter(outputDir + "/overview.md");
+            BufferedWriter bw2 = new BufferedWriter(fw2);
+            Mat m = Imgcodecs.imread(matPath, Imgcodecs.IMREAD_REDUCED_COLOR_8);
+            Size s = m.size();
+
+            int i = 0;
+            bw2.write("<html>\n" +
+                    "<head>\n" +
+                    "  <style>\n" +
+                    "    .row {\n" +
+                    "  display: flex;\n" +
+                    "  flex-wrap: wrap;\n" +
+                    "  padding: 0 4px;\n" +
+                    "}\n" +
+                    "\n" +
+                    "/* Create two equal columns that sits next to each other */\n" +
+                    ".column {\n" +
+                    "  flex: 50%;\n" +
+                    "  padding: 0 4px;\n" +
+                    "}\n" +
+                    "\n" +
+                    ".column img {\n" +
+                    "  height: 50%;\n" +
+                    "  width: 50%;\n" +
+                    "  margin-top: 8px;\n" +
+                    "  vertical-align: middle;\n" +
+                    "}\n" +
+                    "img {\n" +
+                    "  border-radius: 8px;\n" +
+                    "    height: 128px;\n" +
+                    "    width: 120px;\n" +
+                    "}" +
+                    "</style>\n" +
+                    "</head>");
+            bw2.newLine();
+            bw2.write("<div class=\"row\">");
+            bw2.newLine();
+
+            bw2.write("<div class=\"column\">");
+            bw2.newLine();
+            for (String f : filters) {
+
+//                Class<?> _f = Class.forName(f);
+//                Filter __f = (Filter) _f.newInstance();
+                String filterName = getFilterName(f);
+                System.out.printf("Loading: %s\n", filterName);
+                String imageFile = filterName+".png";
+                if(!new File(outputDir+"/"+imageFile).exists()) {
+                    System.out.println("Missing:"+outputDir+"/"+imageFile);
+                    imageFile = "original.png";
+                }
+
+//                if (i % 7 == 0) {
+//                    bw2.write("<div class=\"column\">");
+//                    bw2.newLine();
+//                }
+                bw2.write(String.format("<a href=\"#/filters/filters?id=%s\"><img title=\"%s\" alt=\"%s\" src=\"filters/%s\"></a>", filterName, filterName, filterName, imageFile));
+                bw2.newLine();
+//                if (i % 7 == 6) {
+//                    bw2.write("</div>");
+//                    bw2.newLine();
+//                }
+
+                i++;
+                bw2.flush();
+            }
+            bw2.write("</div>");
+            bw2.newLine();
+
+            bw2.write("</div>");
+            bw2.newLine();
+            bw2.write("</html>");
+            bw2.newLine();
+            bw2.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+
+    }
+
     public static void generateFilterDoc(String outputDir, String matPath) {
         System.out.printf("Generating filters documentation: %s\n", outputDate());
         try {
@@ -118,6 +216,7 @@ public class FindFilters {
 
             Mat m = Imgcodecs.imread(matPath, Imgcodecs.IMREAD_REDUCED_COLOR_8);
 
+
             Imgcodecs.imwrite(outputDir + "/original.png", m);
             bw.write("# Original");
             bw.newLine();
@@ -128,7 +227,8 @@ public class FindFilters {
                 try {
                     Class<?> _f = Class.forName(f);
                     Filter __f = (Filter) _f.newInstance();
-                    System.out.println("Loading:" + _f.getSimpleName());
+                    String filterName = getFilterName(__f);
+                    System.out.printf("Loading: %s\n", filterName);
 
                     Mat c = m.clone();
 
@@ -136,7 +236,7 @@ public class FindFilters {
                     Mat d = __f.apply(c);
                     long endTime = System.currentTimeMillis();
 
-                    bw.write("# " + _f.getSimpleName());
+                    bw.write("# " + filterName);
                     bw.newLine();
                     bw.write("*Load with:*");
                     bw.newLine();
@@ -148,15 +248,18 @@ public class FindFilters {
                     bw.newLine();
                     bw.write("*Result:*");
                     bw.newLine();
-                    bw.write("![](" + _f.getSimpleName() + ".png" + ")");
+                    bw.newLine();
+                    bw.write("![](" + filterName + ".png" + ")");
+                    bw.newLine();
                     bw.newLine();
                     bw.write(String.format("Execution Time: %d ms", endTime - startTime));
+                    bw.newLine();
                     bw.newLine();
 
                     bw.flush();
 
-                    Imgcodecs.imwrite(outputDir + "/" + _f.getSimpleName() + ".png", d);
-                    System.out.printf("Filter %s executed in %d ms\n", _f.getSimpleName(), endTime - startTime);
+                    Imgcodecs.imwrite(outputDir + "/" + filterName + ".png", d);
+                    System.out.printf("Filter %s executed in %d ms\n", filterName, endTime - startTime);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -182,6 +285,7 @@ public class FindFilters {
         String output = args.length >= 1 ? args[0] : "output";
         String matPath = args.length >= 2 ? args[1] : FindFilters.class.getClassLoader().getResource("marcel.jpg").getPath();
         generateFilterDoc(output, matPath);
+        generateOverview(output, matPath);
 //        generateEDNWithAllFilters(output + "/filters.edn");
     }
 }
