@@ -42,16 +42,22 @@ public class MyTest {
 //                "{:class origami.filters.NoOP}",
 //                "{:class origami.filters.brandnew.PinkForeground}",
 //                "{:class origami.filters.inprogress.Waves}",
-                  "{:class origami.filters.video.VHS}",
-                  "{:class origami.filters.video.VHSEnhanced}",
-                "{:class origami.filters.video.OldFilm}",
-                "{:class origami.filters.video.Terminator}",
-                "{:class origami.filters.video.EarlyDaysOfColorTV}",
+//                  "{:class origami.filters.video.VHS}",
+//                  "{:class origami.filters.video.VHSEnhanced}",
+//                "{:class origami.filters.video.OldFilm}",
+//                "{:class origami.filters.video.Terminator}",
+//                "{:class origami.filters.video.EarlyDaysOfColorTV}",
+                "{:class origami.filters.instagram.gpt.Gotham}",
+                "{:class origami.filters.instagram.gpt.Melbourne}",
+                "{:class origami.filters.instagram.gpt.Lark}",
+                "{:class origami.filters.instagram.gpt.Mayfair}",
+                "{:class origami.filters.instagram.gpt.XProII}",
+                "{:class origami.filters.instagram.gpt.ShadowEnhance}",
 
         };
         for (String filter : filters) {
             Filter f = Origami.StringToFilter(filter);
-            imwrite("build/"+f.getClass().getSimpleName()+".png", f.apply(Marcel));
+            imwrite("build/"+f.getClass().getSimpleName()+".png", f.apply(Marcel.clone()));
         }
 
 //        tonemapper.setGamma(1.2f);
