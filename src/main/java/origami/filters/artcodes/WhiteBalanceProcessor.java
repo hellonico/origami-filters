@@ -1,4 +1,4 @@
-package origami.artcodes;
+package origami.filters.artcodes;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
