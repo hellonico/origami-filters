@@ -13,7 +13,7 @@ public class MyTest {
     public void helloSepia() {
         Origami.init();
 
-        String matPath = MyTest.class.getClassLoader().getResource("marcel.jpg").getPath();
+        String matPath = MyTest.class.getClassLoader().getResource("marcel.png").getPath();
         Mat Marcel = imread(matPath);
         String[] filters = new String[]{
 //                "{:class origami.filters.brandnew.PixelSepia :depth 20 :intensity 50}",
@@ -22,7 +22,7 @@ public class MyTest {
 //                "{:class origami.filters.brandnew.Sobelo}",
 //                  "{:class origami.filters.brandnew.GammaCorrection :gamma 5.5 }",
 //                "{:class origami.filters.brandnew.BasicLinear}",
-//                "{:class origami.filters.brandnew.WhiteBalanceProcessor}",
+//                "{:class origami.filters.artcodes.WhiteBalanceProcessor}",
                 // "{:class origami.filters.artcodes.HlsEditImageProcessor :repeat 2 :light 30 :hue -110 :saturation 150}"
 //                "{:class origami.filters.queen.Queen$Brian}",
 //                "{:class origami.filters.queen.Queen$Freddy}",
@@ -47,16 +47,20 @@ public class MyTest {
 //                "{:class origami.filters.video.OldFilm}",
 //                "{:class origami.filters.video.Terminator}",
 //                "{:class origami.filters.video.EarlyDaysOfColorTV}",
-                "{:class origami.filters.instagram.gpt.Gotham}",
-                "{:class origami.filters.instagram.gpt.Melbourne}",
-                "{:class origami.filters.instagram.gpt.Lark}",
-                "{:class origami.filters.instagram.gpt.Mayfair}",
-                "{:class origami.filters.instagram.gpt.XProII}",
-                "{:class origami.filters.instagram.gpt.ShadowEnhance}",
+//                "{:class origami.filters.instagram.gpt.Gotham}",
+//                "{:class origami.filters.instagram.gpt.Melbourne}",
+//                "{:class origami.filters.instagram.gpt.Lark}",
+//                "{:class origami.filters.instagram.gpt.Mayfair}",
+//                "{:class origami.filters.instagram.gpt.XProII}",
+//                "{:class origami.filters.instagram.gpt.ShadowEnhance}",
+                "{:class origami.filters.brandnew.GradienteVermelho$Horizontal}",
+                "{:class origami.filters.brandnew.GradienteVermelho$Vertical}",
+                    "{:class origami.filters.brandnew.Matrix}",
 
         };
         for (String filter : filters) {
             Filter f = Origami.StringToFilter(filter);
+            System.out.println("Loaded:"+f.getClass().getName());
             imwrite("build/"+f.getClass().getSimpleName()+".png", f.apply(Marcel.clone()));
         }
 
