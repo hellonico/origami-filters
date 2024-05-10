@@ -78,7 +78,7 @@ compileTestKotlin {
 }
 
 task generateDoc(type: JavaExec) {
-	main = 'origami.FindFilters' // Replace 'com.example.MainClass' with the fully qualified name of your main class
+	main = 'origami.FindFilters'
 	classpath = sourceSets.main.runtimeClasspath
-	args = ["$arg1","$arg2"]
+	args = ["../web-docs/filters","src/test/resources/marcel.png"]
 }
