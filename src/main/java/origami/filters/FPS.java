@@ -15,10 +15,12 @@ public class FPS extends Annotate implements Filter {
     @Override
     public Mat apply(Mat in) {
         count++;
-        if(count > 10) {
+        if(count > 9) {
             long end = System.currentTimeMillis();
-            long fps = (end - start ) / 10000;
+            long fps = (end - start ) * 10 / 1000;
             setText("FPS: "+fps);
+//            System.out.printf("Start %d End %d\n", start, end);
+//            System.out.printf("Count %d fps %d\n", count, fps);
             // reset
             start = end;
             count = 0;

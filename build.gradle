@@ -3,11 +3,6 @@ apply plugin: 'kotlin'
 //apply plugin: 'maven'
 apply plugin: "maven-publish"
 
-group = 'origami'
-version = '1.46'
-
-sourceCompatibility = 11
-targetCompatibility = 11
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
@@ -78,7 +73,14 @@ compileTestKotlin {
 }
 
 task generateDoc(type: JavaExec) {
-	main = 'origami.FindFilters'
+	main = 'origami.FindFilters$GenerateDoc'
 	classpath = sourceSets.main.runtimeClasspath
 	args = ["../web-docs/filters","src/test/resources/marcel.png"]
+}
+
+task generateEdn(type: JavaExec) {
+	main = 'origami.FindFilters$GenerateEdn'
+	classpath = sourceSets.main.runtimeClasspath
+	args = []
+//	args = ["../web-docs/filters","src/test/resources/marcel.png"]
 }

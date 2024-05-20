@@ -9,10 +9,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import origami.annotations.Parameter;
 import origami.annotations.Usage;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.time.LocalDateTime;
@@ -52,6 +49,11 @@ public class FindFilters {
             Collections.sort(filters);
             FileWriter fw = new FileWriter(path);
             BufferedWriter bw = new BufferedWriter(fw);
+            String version = loadVersion();
+            bw.write(";; Origami Filters EDN: "+version);
+            bw.newLine();
+            bw.write(";; Generated: "+new Date().toString());
+            bw.newLine();
             bw.write("[\n");
             for (String f : filters) {
                 try {
@@ -79,7 +81,7 @@ public class FindFilters {
                         }
                     }
 
-                    bw.append(";");
+                    bw.append(";;");
                     bw.write(Origami.FilterToString(__f));
                     bw.newLine();
                     bw.newLine();
@@ -280,12 +282,43 @@ public class FindFilters {
         generateFilterDoc("output", matPath);
     }
 
+    public static String loadVersion() {
+        Properties prop = new Properties();
+        try {
+            prop.load(new FileInputStream("gradle.properties"));
+            return (String) prop.get("version");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     public static void main(String... args) {
+        System.out.printf("Loading filters version: %s\n", loadVersion());
         Origami.init();
         String output = args.length >= 1 ? args[0] : "output";
         String matPath = args.length >= 2 ? args[1] : FindFilters.class.getClassLoader().getResource("marcel.jpg").getPath();
-        generateFilterDoc(output, matPath);
-        generateOverview(output, matPath);
-//        generateEDNWithAllFilters(output + "/filters.edn");
+//        generateFilterDoc(output, matPath);
+//        generateOverview(output, matPath);
+
+    }
+
+    public static class GenerateDoc {
+        public static void main(String... args) {
+            System.out.printf("Loading filters version: %s\n", loadVersion());
+            Origami.init();
+            String output = args.length >= 1 ? args[0] : "output";
+            String matPath = args.length >= 2 ? args[1] : FindFilters.class.getClassLoader().getResource("marcel.jpg").getPath();
+//        generateFilterDoc(output, matPath);
+        }
+    }
+
+    public static class GenerateEdn {
+        public static void main(String... args) {
+            System.out.printf("Loading filters version: %s\n", loadVersion());
+            Origami.init();
+            String output = args.length >= 1 ? args[0] : "output";
+            generateEDNWithAllFilters(output + "/filters.edn");
+        }
     }
 }

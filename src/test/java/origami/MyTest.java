@@ -53,14 +53,19 @@ public class MyTest {
 //                "{:class origami.filters.instagram.gpt.Mayfair}",
 //                "{:class origami.filters.instagram.gpt.XProII}",
 //                "{:class origami.filters.instagram.gpt.ShadowEnhance}",
-                "{:class origami.filters.brandnew.GradienteVermelho$Horizontal}",
-                "{:class origami.filters.brandnew.GradienteVermelho$Vertical}",
-                    "{:class origami.filters.brandnew.Matrix}",
+//                "{:class origami.filters.brandnew.GradienteVermelho$Horizontal}",
+//                "{:class origami.filters.brandnew.GradienteVermelho$Vertical}",
+//                    "{:class origami.filters.cartoon.NewCartoon}",
+//                "{:class origami.filters.cartoon.NewCartoon2}",
+//                "{:class origami.filters.brandnew.Vignetting}",
+//                "{:channel 0 :alpha 0.9 :beta 0 :gridSize 50 :class origami.filters.brandnew.PhotoMosaicOne}",
+                "{:class origami.filters.brandnew.child.ChildLikeImage :radiusBound 2 :numberOfTouches 4 :zoomIn 10 :zoomOut 10 :combined false}"
 
         };
         for (String filter : filters) {
             Filter f = Origami.StringToFilter(filter);
             System.out.println("Loaded:"+f.getClass().getName());
+            System.out.println(Origami.FilterToString(f));
             imwrite("build/"+f.getClass().getSimpleName()+".png", f.apply(Marcel.clone()));
         }
 
