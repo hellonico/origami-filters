@@ -59,7 +59,8 @@ public class MyTest {
 //                "{:class origami.filters.cartoon.NewCartoon2}",
 //                "{:class origami.filters.brandnew.Vignetting}",
 //                "{:channel 0 :alpha 0.9 :beta 0 :gridSize 50 :class origami.filters.brandnew.PhotoMosaicOne}",
-                "{:class origami.filters.brandnew.child.ChildLikeImage :radiusBound 2 :numberOfTouches 4 :zoomIn 10 :zoomOut 10 :combined false}"
+                //"{:class origami.filters.brandnew.child.ChildLikeImage :radiusBound 2 :numberOfTouches 4 :zoomIn 10 :zoomOut 10 :combined true}"
+                "{:aperture 3, :blur 7, :class origami.filters.cartoon.NewCartoon2, :kmeans 8, :lineSize 7}"
 
         };
         for (String filter : filters) {

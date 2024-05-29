@@ -84,6 +84,7 @@ public class FindFilters {
                     bw.append(";;");
                     bw.write(Origami.FilterToString(__f));
                     bw.newLine();
+//                    bw.append(";; Spped")
                     bw.newLine();
                 } catch (Exception e) {
                     //e.printStackTrace();

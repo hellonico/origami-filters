@@ -300,9 +300,14 @@ public class ChildLikeImage extends FilterWithPalette  implements Filter {
 
         Mat mask = Mat.zeros(image.size(), CvType.CV_8UC1);
         fillPoly(mask, List.of(points), new Scalar(255));
-        Mat image_submat = image.submat(boundingBox);
-        Mat mask_submat = mask.submat(boundingBox);
-        gradient.copyTo(image_submat, mask_submat);
+        try {
+            Mat image_submat = image.submat(boundingBox);
+            Mat mask_submat = mask.submat(boundingBox);
+            gradient.copyTo(image_submat, mask_submat);
+        } catch(Exception e) {
+            // fails
+        }
+
     }
 
     public int getZoomIn() {
