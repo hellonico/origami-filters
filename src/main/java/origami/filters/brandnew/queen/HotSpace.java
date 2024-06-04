@@ -3,6 +3,7 @@ package origami.filters.brandnew.queen;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import origami.Filter;
+import origami.render.FourToOne;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,17 +50,7 @@ public class HotSpace implements Filter {
         Mat roger = f3.apply(mat);
         Mat john = f4.apply(mat);
 
-        return ManyToOne(Arrays.asList(freddy, roger), Arrays.asList(john, brian));
+        return new FourToOne().apply(new Mat[] {freddy, roger, john, brian});
     }
 
-    private static Mat ManyToOne(List<Mat> topL, List<Mat> botomL) {
-        Mat top = new Mat();
-        Core.vconcat(topL, top);
-        Mat bottom = new Mat();
-        Core.vconcat(botomL, bottom);
-        Mat result = new Mat();
-        Core.hconcat(Arrays.asList(top, bottom), result);
-
-        return result;
-    }
 }

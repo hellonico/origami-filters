@@ -60,8 +60,11 @@ public class MyTest {
 //                "{:class origami.filters.brandnew.Vignetting}",
 //                "{:channel 0 :alpha 0.9 :beta 0 :gridSize 50 :class origami.filters.brandnew.PhotoMosaicOne}",
                 //"{:class origami.filters.brandnew.child.ChildLikeImage :radiusBound 2 :numberOfTouches 4 :zoomIn 10 :zoomOut 10 :combined true}"
-                "{:aperture 3, :blur 7, :class origami.filters.cartoon.NewCartoon2, :kmeans 8, :lineSize 7}"
-
+//                "{:aperture 3, :blur 7, :class origami.filters.cartoon.NewCartoon2, :kmeans 8, :lineSize 7}"
+                //"{:class origami.filters.brandnew.PinkTilt :beta 0.5 :alpha 0.5 :gamma 0 :color \"deeppink_3\"}"
+                //"{:class origami.filters.brandnew.art.UkiyoeStyle}"
+                //"{:sigmaColor 75, :blockSize 9, :maxCount 10000, :sigmaSpace 75, :ksize 7, :k 8, :class origami.filters.brandnew.anime.Anime, :epsilon 1.0E-4, :d 9}"
+                "{:class origami.filters.brandnew.FilmNoir}"
         };
         for (String filter : filters) {
             Filter f = Origami.StringToFilter(filter);
