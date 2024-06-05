@@ -8,6 +8,8 @@ import origami.Filter;
 public class FilmNoir implements Filter {
     @Override
     public Mat apply(Mat src) {
+
+
         // Convert to grayscale
         Mat gray = new Mat();
         Imgproc.cvtColor(src, gray, Imgproc.COLOR_BGR2GRAY);
@@ -16,34 +18,35 @@ public class FilmNoir implements Filter {
         Mat highContrast = new Mat();
         Imgproc.equalizeHist(gray, highContrast);
 
+        // Convert highContrast to CV_32F
+//        Mat highContrast32F = new Mat();
+        highContrast.convertTo(highContrast, CvType.CV_64FC1);
+
         // Create a vignette mask
         Mat vignette = createVignetteMask(highContrast.size());
 
-        // Apply the vignette mask to the image
+        // Apply the vignette mask to the image using addWeighted
+        Mat filmNoir = new Mat();
+        Core.addWeighted(highContrast, 0.5, vignette, 0.4, 0, filmNoir);
 
-//        Mat filmNoir = new Mat();
-        Imgproc.cvtColor(highContrast, highContrast, Imgproc.COLOR_GRAY2BGR);
-        Mat filmNoir = new Vignetting().apply(highContrast);
-//        Core.multiply(highContrast, vignette, filmNoir, 1.0 / 255);
+        // Convert filmNoir back to CV_8U
+        Mat filmNoir8U = new Mat();
+        filmNoir.convertTo(filmNoir8U, CvType.CV_8UC3);
 
         return filmNoir;
     }
-
     private static Mat createVignetteMask(Size size) {
-        Mat vignette = Mat.ones(size, CvType.CV_32F);
-        Point center = new Point(size.width / 2, size.height / 2);
-        double maxDist = Math.sqrt(center.x * center.x + center.y * center.y);
+        Mat kernelX = Imgproc.getGaussianKernel((int)size.width, size.width / 2.0);
+        Mat kernelY = Imgproc.getGaussianKernel((int)size.height, size.height / 2.0);
+        Mat kernelXY = new Mat();
+        Core.gemm(kernelX, kernelY.t(), 1, new Mat(), 0, kernelXY);
+        Core.normalize(kernelXY, kernelXY, 0, 1, Core.NORM_MINMAX);
 
-        for (int i = 0; i < size.height; i++) {
-            for (int j = 0; j < size.width; j++) {
-                double dx = (j - center.x) / center.x;
-                double dy = (i - center.y) / center.y;
-                double dist = Math.sqrt(dx * dx + dy * dy);
-                vignette.put(i, j, (1.0 - dist) * 255);
-            }
-        }
+        // Convert to a 3-channel image
+        Mat vignette = new Mat(size, CvType.CV_32F);
+        Core.multiply(kernelXY, new Scalar(255), vignette);
 
-        return vignette;
+        // 謎
+        return vignette.t();
     }
-
 }
