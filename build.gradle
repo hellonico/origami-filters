@@ -61,16 +61,16 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-}
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-}
+// compileKotlin {
+//     kotlinOptions {
+//         jvmTarget = "11"
+//     }
+// }
+// compileTestKotlin {
+//     kotlinOptions {
+//         jvmTarget = "11"
+//     }
+// }
 
 task generateDoc(type: JavaExec) {
 	main = 'origami.FindFilters$GenerateDoc'
