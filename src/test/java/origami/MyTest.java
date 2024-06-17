@@ -64,7 +64,8 @@ public class MyTest {
                 //"{:class origami.filters.brandnew.PinkTilt :beta 0.5 :alpha 0.5 :gamma 0 :color \"deeppink_3\"}"
                 //"{:class origami.filters.brandnew.art.UkiyoeStyle}"
                 //"{:sigmaColor 75, :blockSize 9, :maxCount 10000, :sigmaSpace 75, :ksize 7, :k 8, :class origami.filters.brandnew.anime.Anime, :epsilon 1.0E-4, :d 9}"
-                "{:class origami.filters.brandnew.FilmNoir}"
+//                "{:class origami.filters.brandnew.FilmNoir}",
+                "{:class origami.filters.brandnew.Highlights :highlights 150}"
         };
         for (String filter : filters) {
             Filter f = Origami.StringToFilter(filter);
