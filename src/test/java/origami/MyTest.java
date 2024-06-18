@@ -13,7 +13,7 @@ public class MyTest {
     public void helloSepia() {
         Origami.init();
 
-        String matPath = MyTest.class.getClassLoader().getResource("marcel.png").getPath();
+        String matPath = MyTest.class.getClassLoader().getResource("mozart.png").getPath();
         Mat Marcel = imread(matPath);
         String[] filters = new String[]{
 //                "{:class origami.filters.brandnew.PixelSepia :depth 20 :intensity 50}",
@@ -65,7 +65,10 @@ public class MyTest {
                 //"{:class origami.filters.brandnew.art.UkiyoeStyle}"
                 //"{:sigmaColor 75, :blockSize 9, :maxCount 10000, :sigmaSpace 75, :ksize 7, :k 8, :class origami.filters.brandnew.anime.Anime, :epsilon 1.0E-4, :d 9}"
 //                "{:class origami.filters.brandnew.FilmNoir}",
-                "{:class origami.filters.brandnew.Highlights :highlights 150}"
+                //"{:class origami.filters.brandnew.Highlights :highlights 150}"
+
+//                "{:class origami.filters.brandnew.OldFilmPoster :highlights 150}"
+                "{:class origami.filters.inprogress.OldMoviePoster :borderSize 40 :colorQuantization 3 :saturation 8.5}"
         };
         for (String filter : filters) {
             Filter f = Origami.StringToFilter(filter);
