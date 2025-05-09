@@ -68,7 +68,9 @@ public class MyTest {
                 //"{:class origami.filters.brandnew.Highlights :highlights 150}"
 
 //                "{:class origami.filters.brandnew.OldFilmPoster :highlights 150}"
-                "{:class origami.filters.inprogress.OldMoviePoster :borderSize 40 :colorQuantization 3 :saturation 8.5}"
+//                "{:class origami.filters.inprogress.OldMoviePoster :borderSize 40 :colorQuantization 3 :saturation 8.5}"
+//                "{:class origami.filters.brandnew.art.ClaudeGlass}"
+                "{:class origami.filters.brandnew.OldTV :threshold 100}"
         };
         for (String filter : filters) {
             Filter f = Origami.StringToFilter(filter);

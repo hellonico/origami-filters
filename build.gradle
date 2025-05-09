@@ -15,7 +15,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-	implementation group: 'origami', name: 'origami', version:'4.9.0-8'
+	implementation group: 'origami', name: 'origami', version:'4.10.0-5'
 	implementation group: 'org.clojure', name: 'clojure', version:'1.11.3'
 	implementation 'io.github.classgraph:classgraph:4.8.65'
 	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
@@ -45,15 +45,12 @@ publishing {
 		maven {
 			name "nexus"
 			url "https://repository.hellonico.info/repository/hellonico/"
-			credentials {
-				username mavenUser
-				password mavenPassword
-			}
+
 		}
 	}
 }
 buildscript {
-    ext.kotlin_version = '1.9.0-RC'
+    ext.kotlin_version = '2.1.0'
     repositories {
         mavenCentral()
     }
@@ -61,16 +58,19 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
- compileKotlin {
-     kotlinOptions {
-         jvmTarget = "11"
-     }
- }
- compileTestKotlin {
-     kotlinOptions {
-         jvmTarget = "11"
-     }
- }
+kotlin {
+    jvmToolchain(23)
+}
+// compileKotlin {
+//     kotlinOptions {
+//         jvmTarget = "23"
+//     }
+// }
+// compileTestKotlin {
+//     kotlinOptions {
+//         jvmTarget = "23"
+//     }
+// }
 
 task generateDoc(type: JavaExec) {
 	main = 'origami.FindFilters$GenerateDoc'
