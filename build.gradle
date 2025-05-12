@@ -99,3 +99,21 @@ task generateEdn(type: JavaExec) {
 	args = []
 //	args = ["../web-docs/filters","src/test/resources/marcel.png"]
 }
+
+task bumpVersion {
+	doLast {
+		def propertiesFile = file('gradle.properties')
+		def lines = propertiesFile.readLines().collect { line ->
+			if (line.startsWith("version=")) {
+				def currentVersion = line.replace("version=", "")
+				def parts = currentVersion.split('\\.').collect { it.toInteger() }
+				parts[parts.size() - 1] += 1 // Bump the patch version
+				def newVersion = parts.join(".")
+				println "Bumping version to $newVersion"
+				return "version=$newVersion"
+			}
+			return line
+		}
+		propertiesFile.text = lines.join(System.lineSeparator())
+	}
+}
