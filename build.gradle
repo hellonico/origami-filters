@@ -1,10 +1,29 @@
+buildscript {
+	ext.kotlin_version = '2.1.0'
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+	}
+}
+
+plugins {
+//	id("maven-publish")
+	id("net.linguica.maven-settings") // Enables reading settings.xml
+}
+
 apply plugin: 'java'
 apply plugin: 'kotlin'
 //apply plugin: 'maven'
 apply plugin: "maven-publish"
+//apply plugin: "net.linguica.maven-settings"
+
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
+	sourceCompatibility = '17'
+	targetCompatibility = '17'
 }
 
 repositories {
@@ -43,34 +62,30 @@ publishing {
 	repositories {
 
 		maven {
-			name "nexus"
+			name "vendredi"
 			url "https://repository.hellonico.info/repository/hellonico/"
+//			credentials {
 
+//				username = serverCredentials?.username
+//				password = serverCredentials?.password
+//			}
 		}
 	}
 }
-buildscript {
-    ext.kotlin_version = '2.1.0'
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
+
 kotlin {
     jvmToolchain(23)
 }
-// compileKotlin {
-//     kotlinOptions {
-//         jvmTarget = "23"
-//     }
-// }
-// compileTestKotlin {
-//     kotlinOptions {
-//         jvmTarget = "23"
-//     }
-// }
+ compileKotlin {
+     kotlinOptions {
+         jvmTarget = "17"
+     }
+ }
+ compileTestKotlin {
+     kotlinOptions {
+         jvmTarget = "17"
+     }
+ }
 
 task generateDoc(type: JavaExec) {
 	main = 'origami.FindFilters$GenerateDoc'
